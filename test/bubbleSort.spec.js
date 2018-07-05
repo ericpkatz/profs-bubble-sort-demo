@@ -1,5 +1,6 @@
 const expect = require('chai').expect;
 const bubbleSort = require('../bubbleSort');
+const sinon = require('sinon');
 
 describe('bubbleSort', ()=> {
   it('exists', ()=> {
@@ -12,12 +13,9 @@ describe('bubbleSort', ()=> {
     expect(bubbleSort([2, 0, 1])).to.eql([0, 1, 2]);
   });
   it('sorts efficiently', ()=> {
-    let counter = 0; 
-    const fn = ()=> {
-      counter++;
-    };
+    const fn = sinon.spy();
 
     bubbleSort([0, 1, 2, 3, 4], fn);
-    expect(counter).to.equal(4);
+    expect(fn.callCount).to.equal(4);
   });
 });
